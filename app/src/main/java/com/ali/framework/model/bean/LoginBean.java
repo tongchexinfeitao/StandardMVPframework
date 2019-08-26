@@ -100,5 +100,26 @@ public class LoginBean {
         public void setUserId(int userId) {
             this.userId = userId;
         }
+
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "headPic='" + headPic + '\'' +
+                    ", nickName='" + nickName + '\'' +
+                    ", phone='" + phone + '\'' +
+                    ", sessionId='" + sessionId + '\'' +
+                    ", sex=" + sex +
+                    ", userId=" + userId +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "LoginBean{" +
+                "result=" + result +
+                ", message='" + message + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

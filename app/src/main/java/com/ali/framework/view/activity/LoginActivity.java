@@ -33,8 +33,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     //成功
     @Override
-    public void onLoginSuccess(LoginBean orderFormBean) {
-        Log.i("TAG", "登录成功");
+    public void onLoginSuccess(LoginBean loginBean) {
+        Log.i("TAG", "登录成功: " + loginBean.toString());
         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
     }
 
