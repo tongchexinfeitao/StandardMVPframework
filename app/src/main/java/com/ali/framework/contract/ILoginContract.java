@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public interface ILoginContract {
     /**
-     * view层
+     * view层  命名必须是IView
      */
     interface IView extends IBaseView {
         void onLoginSuccess(LoginBean loginBean);
@@ -19,14 +19,14 @@ public interface ILoginContract {
     }
 
     /**
-     * presenter层
+     * presenter层   命名必须是IPresenter
      */
     interface IPresenter {
         void login(Map<String, Object> paramsMap);
     }
 
     /**
-     * model层
+     * model层   命名必须是IModel
      */
     interface IModel {
         void login(Map<String, Object> paramsMap, IModelCallback callback);
