@@ -7,6 +7,11 @@ import java.util.Map;
 
 /**
  * 契约类，方便统一管理相关接口
+ * <p>
+ * <p>
+ * 声明规范：
+ * 1、命名规范为 "I${业务模块}Contract" 格式，如：登录模块 Contract 命名为 "ILoginContract"
+ * 2、内部接口命名规范为 IView 、IPresenter 、IModel、IModelCallback   ps：内部接口命名不加业务名字
  */
 public interface ILoginContract {
     /**

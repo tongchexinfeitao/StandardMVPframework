@@ -14,8 +14,17 @@ import java.util.HashMap;
 import butterknife.OnClick;
 
 /**
- * 需要指定 泛型 P 的具体类型
- * 需要实现对应锲约的IView接口
+ * 声明规范：
+ * 1、命名规范为 "${业务模块}Activity"  如：登录模块 Activity 命名为 "LoginActivity"
+ * 2、必须指定泛型 P 的具体类型
+ * 3、必须 implements 对应锲约中的 IView 接口  如: {@link ILoginContract.IView}
+ * <p>
+ * <p>
+ * 使用规范：
+ * 1、必须在 {@link #provideLayoutId()} 方法中返回对应的 laytoutId
+ * 2、必须在 {@link #providePresenter()} 方法中返回对应的 Presenter 对象
+ * 3、在{@link #initData()}中联网请求
+ * 4、在重写的成功、失败方法中，更新UI
  */
 public class LoginActivity extends BaseActivity<LoginPresenter> implements ILoginContract.IView {
 

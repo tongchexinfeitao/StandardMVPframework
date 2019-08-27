@@ -16,6 +16,10 @@ import com.ali.framework.utils.NetUtil;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * 声明规范和使用规范同BaseActivity
+ * {@link BaseActivity}
+ */
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IBaseView {
     protected P mPresenter;
     private Unbinder mUnbinder;

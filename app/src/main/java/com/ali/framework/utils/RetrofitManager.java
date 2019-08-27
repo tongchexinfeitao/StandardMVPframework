@@ -11,6 +11,15 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Retrofit工具类
+ *
+ * 使用规范：
+ * 1、{@link RetrofitManager}使用静态内部类的单例模式
+ * 2、使用 {@link #getInstance()}方法获取单例
+ * 3、使用单例的{@link #create()}方法获取默认的{@link IApi}对象
+ * 4、使用获取到的IApi对象调用对应的接口方法
+ */
 public class RetrofitManager {
     private Retrofit mRetrofit;
     private static final String BASE_URL = Constant.BASE_URL;

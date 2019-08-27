@@ -6,6 +6,18 @@ import com.ali.framework.app.App;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * BasePresenter声明规范：
+ * 1、封装泛型 V extents {@link IBaseView}
+ * 2、封装 {@link #attachView(IBaseView)} 和 {@link #detachView()}
+ * 3、封装{@link #initModel()} 方便子类初始化 Model
+ * 4、封装 {@link #isViewAttached()} 用来判断 V 是否为 null
+ * 5、封装 {@link #getView()} 方便获取 V 进行结果回调
+ * <p>
+ * <p>
+ * 子类使用规范：
+ * {@link com.ali.framework.presenter.LoginPresenter}
+ */
 public abstract class BasePresenter<V extends IBaseView> {
 
     private WeakReference<V> mWeakReference;
@@ -21,10 +33,16 @@ public abstract class BasePresenter<V extends IBaseView> {
     protected abstract void initModel();
 
 
+    /**
+     * 绑定View
+     */
     protected void attachView(V v) {
         mWeakReference = new WeakReference<>(v);
     }
 
+    /**
+     * 解绑View
+     */
     protected void detachView() {
         if (mWeakReference != null) {
             mWeakReference.clear();
@@ -33,7 +51,7 @@ public abstract class BasePresenter<V extends IBaseView> {
     }
 
     /**
-     * 判断view层是否挂载
+     * 判断view是否挂载
      * <p>
      * 防止出现 presenter 层 view 调用空指针
      * 每次调用业务请求的时候都要先调用方法检查是否与 View 绑定

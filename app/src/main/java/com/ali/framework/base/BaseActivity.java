@@ -11,6 +11,20 @@ import com.ali.framework.utils.NetUtil;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * BaseActivity声明规范：
+ * 1、封装泛型 P extents {@link BasePresenter}
+ * 2、implements {@link IBaseView}  ps:方便基类封装 P 层绑定和解绑 view 的操作
+ * 3、使用模板方法设计模式，规范子类执行流程
+ * 4、封装 {@link ButterKnife} bind 和 unBind
+ * 5、封装 P 层 attach 和 dettach
+ * 6、{@link #initView()} ()} 方法空实现，必要的时候子类可以重写，进行find特殊控件，和设置特殊监听
+ * 7、{@link #initData()} 方法空实现，必要的时候子类可以重写，进行初始化数据操作
+ * <p>
+ * <p>
+ * 子类使用规范：
+ * {@link com.ali.framework.view.activity.LoginActivity}
+ */
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IBaseView {
     protected P mPresenter;
     private Unbinder mUnbinder;
