@@ -10,7 +10,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-public interface ILoginApi {
+public interface IApi {
 
     @FormUrlEncoded
     @POST("user/v1/login")

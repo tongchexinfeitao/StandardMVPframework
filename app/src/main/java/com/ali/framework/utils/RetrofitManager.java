@@ -1,6 +1,7 @@
 package com.ali.framework.utils;
 
 import com.ali.framework.app.Constant;
+import com.ali.framework.model.api.IApi;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitManager {
     private Retrofit mRetrofit;
     private static final String BASE_URL = Constant.BASE_URL;
+    //默认的IApi
+    private IApi mIApi;
 
     private static final class SingleHolder {
         private static final RetrofitManager _INSTANCE = new RetrofitManager(BASE_URL);
@@ -36,7 +39,6 @@ public class RetrofitManager {
     }
 
     private OkHttpClient buildOkhttpClient() {
-
         //日志拦截器
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         //设置日志拦截器打印日志的级别
@@ -50,7 +52,21 @@ public class RetrofitManager {
                 .build();
     }
 
+    /**
+     * 如果有其他的IApi，通过这个有参的方法创建
+     */
     public <T> T create(final Class<T> service) {
         return mRetrofit.create(service);
     }
+
+    /**
+     * 创建默认的单例IApi
+     */
+    public IApi create() {
+        if (mIApi == null) {
+            mIApi = create(IApi.class);
+        }
+        return mIApi;
+    }
+
 }

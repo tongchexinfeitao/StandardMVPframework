@@ -1,39 +1,36 @@
 package com.ali.framework.model;
 
-import android.annotation.SuppressLint;
-
 import com.ali.framework.contract.ILoginContract;
-import com.ali.framework.model.api.ILoginApi;
 import com.ali.framework.model.bean.LoginBean;
+import com.ali.framework.utils.CommonObserver;
+import com.ali.framework.utils.CommonSchedulers;
 import com.ali.framework.utils.RetrofitManager;
 
 import java.util.Map;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-
 public class LoginModel implements ILoginContract.IModel {
 
 
-    @SuppressLint("CheckResult")
+    /**
+     * 1、create()方法构造默认的IApi
+     * 2、使用 compose()和 CommonSchedulers 配合切换线程
+     * 3、使用CommonObserver,避免每次重写 onSubscribe（） 和 onComplete()
+     */
     @Override
     public void login(Map<String, Object> paramsMap, final IModelCallback callback) {
-        RetrofitManager.getInstance().create(ILoginApi.class)
+        RetrofitManager.getInstance().create()
                 .login(paramsMap)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<LoginBean>() {
+                .compose(CommonSchedulers.<LoginBean>io2main())
+                .subscribe(new CommonObserver<LoginBean>() {
                     @Override
-                    public void accept(LoginBean loginBean) throws Exception {
+                    public void onNext(LoginBean loginBean) {
                         callback.onLoginSuccess(loginBean);
                     }
-                }, new Consumer<Throwable>() {
+
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        callback.onLoginFailure(throwable);
+                    public void onError(Throwable e) {
+                        callback.onLoginFailure(e);
                     }
                 });
-
     }
 }
